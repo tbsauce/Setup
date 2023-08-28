@@ -65,5 +65,7 @@ fi
 
 git clone git@github.com:tbsauce/Setup.git
 
-bash Setup/pretty.sh
+cd Setup
+
+bash pretty.sh
 
