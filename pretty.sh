@@ -15,5 +15,9 @@ sudo mv gtk.css $HOME/.config/gtk-3.0/gtk.css
 
 sudo mv xfce4-panel.xml $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
 
+xfconf-query -c xfce4-panel -p "/panels/panel-1/background-style" -s "2"
+xfconf-query -c xfce4-panel -p "/panels/panel-1/background-image" -s "$HOME/Setup/Wallpapers/wallpaper2.png"
+
 xfce4-panel -r
+sudo reboot
 
