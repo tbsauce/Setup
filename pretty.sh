@@ -20,6 +20,8 @@ xfconf-query -c xfce4-panel -p "/panels/panel-1/background-image" -s "$HOME/Setu
 
 xfconf-query -c xfce4-desktop -p "/backdrop/screen0/monitorVirtual1/workspace0/last-image" -s "$HOME/Setup/Wallpapers/wallpaper1.jpg"
 
+xfconf-query -c xfce4-desktop -p /desktop-icons/style -s 0
+
 xfce4-panel -r
 sudo reboot
 
