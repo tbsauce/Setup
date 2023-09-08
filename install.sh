@@ -73,11 +73,17 @@ verification+=("npm -v")
 sudo apt-get install -y git
 verification+=("git --version")
 
+
 #Create ssh Key
 ssh-keygen -t rsa -b 4096 -C "telmobelasauce@ua.pt"
 
 #enter this output into git ssh
 cat $HOME/.ssh/id_rsa.pub
+
+git config --global user.email "telmobelasauce@ua.pt"
+git config --global user.name "Sauce"
+git config --global core.editor "code --wait"
+git config --global core.autocrlf input
 
 for item in "${verification[@]}"; do
     $item &>/dev/null
