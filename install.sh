@@ -8,7 +8,6 @@ check_status() {
     fi
 }
 
-
 verification=()
  
 #Upgrade System
@@ -24,97 +23,19 @@ sudo apt-get install -y  tmux
 verification+=("tmux -V")
 
 #setup Tmux conf file
-#rm $HOME/.tmux.conf 
-touch $HOME/.tmux.conf 
-cat <<EOT>> "$HOME/.tmux.conf"
-#Quick Reload
-bind r source-file ~/.tmux.conf \; display "Reloaded!"
-
-#Change Prefix
-unbind \\\\
-set -g prefix \\\\
-bind \\\\ send-prefix
-
-#Set mouse mode one
-set -g mouse on
-
-#Increase History
-set-option -g history-limit 5000
-
-#Set horizonta and vertical split
-bind v split-window -hc "#{pane_current_path}"
-bind h split-window -vc "#{pane_current_path}"
-
-set -g base-index 1
-set -g pane-base-index 1
-
-# switch panes using Alt-arrow without prefix
-bind -n M-Left  select-pane -L
-bind -n M-Right select-pane -R
-bind -n M-Up    select-pane -U
-bind -n M-Down  select-pane -D
-EOT
+mv .tmux.conf $HOME/.tmux.conf
 
 #Albert
 sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/manuelschneid3r/xUbuntu_$(lsb_release -rs)/ /' > /etc/apt/sources.list.d/home:manuelschneid3r.list"
 wget -nv https://download.opensuse.org/repositories/home:manuelschneid3r/xUbuntu_$(lsb_release -rs)/Release.key -O Release.key
 sudo apt-key add - < Release.key
 sudo apt update
-
-
-sudo apt install albert
+sudo apt install -y albert
 verification+=("albert --version")
 
+#AutoStart
 echo "nohup albert &" >> $HOME/.profile
-
-touch $HOME/.config/albert.conf 
-cat <<EOT>> "$HOME/.config/albert.conf"
-[General]
-hotkey=Ctrl+Space
-last_report=1694269465
-showTray=true
-telemetry=true
-terminal=Gnome Terminal
-
-[applications_xdg]
-enabled=true
-
-[calculator_muparser]
-enabled=true
-
-[calculator_qalculate]
-angle_unit=2
-enabled=true
-
-[chromium]
-bookmarks_path=@Invalid()
-enabled=false
-
-[docs]
-enabled=true
-
-[files]
-enabled=true
-home\vboxuser\followSymlinks=false
-home\vboxuser\indexhidden=false
-home\vboxuser\maxDepth=255
-home\vboxuser\mimeFilters=inode/directory
-home\vboxuser\nameFilters=@Invalid()
-home\vboxuser\scanInterval=5
-home\vboxuser\useFileSystemWatches=false
-paths=/home/vboxuser
-
-[python]
-enabled=true
-watchSources=false
-
-[qmlboxmodel]
-windowPosition=@Point(609 190)
-
-[wikipedia]
-enabled=true
-EOT
-
+mv albert.conf $HOME/.config/ 
 source ~/.profile
 
 #Node
@@ -131,36 +52,9 @@ sudo apt-get install nodejs -y
 verification+=("curl -V")
 verification+=("node --version")
 verification+=("npm -v")
-#Git
-sudo apt-get install -y git
-verification+=("git --version")
 
-
-#Create ssh Key
-ssh-keygen -t rsa -b 4096 -C "telmobelasauce@ua.pt"
-
-#enter this output into git ssh
-cat $HOME/.ssh/id_rsa.pub
-
-git config --global user.email "telmobelasauce@ua.pt"
-git config --global user.name "Sauce"
-git config --global core.editor "code --wait"
-git config --global core.autocrlf input
 
 for item in "${verification[@]}"; do
     $item &>/dev/null
     check_status "$item"
 done
-
-read -p "Do you want to continue? (y/n): " choice
-
-if [ "$choice" != "y" ]; then
-    echo "Quitting."
-    exit 0  
-fi
-
-git clone git@github.com:tbsauce/Setup.git
-
-cd Setup
-
-bash pretty.sh
