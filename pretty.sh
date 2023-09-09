@@ -27,5 +27,4 @@ xfconf-query -c xfce4-desktop -p "/backdrop/screen0/monitorVirtual1/workspace0/l
 xfconf-query -c xfce4-desktop -p /desktop-icons/style -s 0 -t int --create
 
 xfce4-panel -r
-sudo reboot
 

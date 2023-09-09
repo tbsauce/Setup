@@ -38,7 +38,6 @@ mkdir -p $HOME/.config/autostart
 mv albert.desktop $HOME/.config/autostart/
 #Config file
 mv albert.conf $HOME/.config/ 
-source ~/.profile
 
 #Node
 sudo rm /var/lib/dpkg/lock-frontend
