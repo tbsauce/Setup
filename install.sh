@@ -24,7 +24,7 @@ sudo apt-get install -y  tmux
 verification+=("tmux -V")
 
 #setup Tmux conf file
-rm $HOME/.tmux.conf 
+#rm $HOME/.tmux.conf 
 touch $HOME/.tmux.conf 
 cat <<EOT>> "$HOME/.tmux.conf"
 #Quick Reload
@@ -54,6 +54,68 @@ bind -n M-Right select-pane -R
 bind -n M-Up    select-pane -U
 bind -n M-Down  select-pane -D
 EOT
+
+#Albert
+sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/manuelschneid3r/xUbuntu_$(lsb_release -rs)/ /' > /etc/apt/sources.list.d/home:manuelschneid3r.list"
+wget -nv https://download.opensuse.org/repositories/home:manuelschneid3r/xUbuntu_$(lsb_release -rs)/Release.key -O Release.key
+sudo apt-key add - < Release.key
+sudo apt update
+
+
+sudo apt install albert
+verification+=("albert --version")
+
+echo "nohup albert &" >> $HOME/.profile
+
+touch $HOME/.config/albert.conf 
+cat <<EOT>> "$HOME/.config/albert.conf"
+[General]
+hotkey=Ctrl+Space
+last_report=1694269465
+showTray=true
+telemetry=true
+terminal=Gnome Terminal
+
+[applications_xdg]
+enabled=true
+
+[calculator_muparser]
+enabled=true
+
+[calculator_qalculate]
+angle_unit=2
+enabled=true
+
+[chromium]
+bookmarks_path=@Invalid()
+enabled=false
+
+[docs]
+enabled=true
+
+[files]
+enabled=true
+home\vboxuser\followSymlinks=false
+home\vboxuser\indexhidden=false
+home\vboxuser\maxDepth=255
+home\vboxuser\mimeFilters=inode/directory
+home\vboxuser\nameFilters=@Invalid()
+home\vboxuser\scanInterval=5
+home\vboxuser\useFileSystemWatches=false
+paths=/home/vboxuser
+
+[python]
+enabled=true
+watchSources=false
+
+[qmlboxmodel]
+windowPosition=@Point(609 190)
+
+[wikipedia]
+enabled=true
+EOT
+
+source ~/.profile
 
 #Node
 sudo rm /var/lib/dpkg/lock-frontend
@@ -102,4 +164,3 @@ git clone git@github.com:tbsauce/Setup.git
 cd Setup
 
 bash pretty.sh
-
