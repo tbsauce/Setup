@@ -19,6 +19,8 @@ git config --global user.name "Sauce"
 git config --global core.editor "code --wait"
 git config --global core.autocrlf input
 
+read -p "Press Any key after adding ssh key to git. "
+
 git clone git@github.com:tbsauce/Setup.git
 
 cd Setup/
