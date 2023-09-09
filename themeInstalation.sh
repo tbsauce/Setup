@@ -1,3 +1,7 @@
+#!/bin/bash
+
+cd Theme/
+
 #Get themes
 mkdir $HOME/.themes
 mkdir $HOME/.icons

@@ -29,20 +29,21 @@ read -p "Do you want to...
     1) Install Tools.
     2) Install Theme.
     3) Both.
+    *) Neither.
 Enter your choice (1/2/3): " choice
 
 case "$choice" in
     1)
         echo "Installing Tools"
-        ./install.sh
+        ./toolsInstalation.sh
         ;;
     2)
         echo "Installing Theme"
-        ./pretty.sh
+        ./themeInstalation.sh
         ;;
     3)
         echo "Installing Tools and Theme."
-        ./install.sh && ./pretty.sh
+        ./toolsInstalation.sh && ./themeInstalation.sh
         ;;
     *)
         echo "Quitting!"

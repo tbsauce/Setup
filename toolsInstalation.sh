@@ -10,6 +10,8 @@ check_status() {
 
 verification=()
  
+cd Tools/
+
 #Upgrade System
 sudo apt-get -y update
 sudo apt-get -y upgrade
