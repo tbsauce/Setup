@@ -34,7 +34,9 @@ sudo apt install -y albert
 verification+=("albert --version")
 
 #AutoStart
-echo "X-GNOME-Autostart-enabled=true" >> /usr/share/applications/albert.desktop
+mkdir -p $HOME/.config/autostart
+mv albert.desktop $HOME/.config/autostart/
+#Config file
 mv albert.conf $HOME/.config/ 
 source ~/.profile
 
